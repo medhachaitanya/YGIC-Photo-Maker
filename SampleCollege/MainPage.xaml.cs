@@ -120,7 +120,7 @@ namespace SampleCollege
 
                     //add the image to the row sp
                     StorageFile currentImagefile = files2[fileIndex];
-                    var spV = new StackPanel() { Orientation = Orientation.Vertical, Margin = new Thickness(10), BorderBrush = new SolidColorBrush(Colors.Black), BorderThickness= new Thickness(imageBorderThickness.Value) };
+                    var spV = new StackPanel() { Orientation = Orientation.Vertical, Margin = new Thickness(10), BorderBrush = new SolidColorBrush(Colors.Black), BorderThickness= new Thickness(imageBorderThickness.Value/10) };
                     BitmapImage bitmapImage = new BitmapImage();
                     Uri uri = new Uri(currentImagefile.Path, UriKind.RelativeOrAbsolute);
                     bitmapImage.UriSource = uri;
@@ -152,8 +152,9 @@ namespace SampleCollege
             var savePicker = new FileSavePicker();
             savePicker.DefaultFileExtension = ".png";
             savePicker.FileTypeChoices.Add(".png", new List<string> { ".png" });
+            savePicker.FileTypeChoices.Add(".jpg", new List<string> { ".jpg" });
             savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            savePicker.SuggestedFileName = "snapshot.png";
+            savePicker.SuggestedFileName = "ExportedImage.png";
 
             // Prompt the user to select a file
             var saveFile = await savePicker.PickSaveFileAsync();
@@ -236,7 +237,7 @@ namespace SampleCollege
                 ToggleSwitch swi = sender as ToggleSwitch;
                 if (swi.IsOn)
                 {
-                    
+                    subheaderTB.Visibility = Visibility.Visible;
                 }
                 else
                 {

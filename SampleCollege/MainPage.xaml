@@ -14,8 +14,8 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Set Image Width x Height"/>
                         <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="widthImage" Text="150" PlaceholderText="Width" Margin="5" InputScope="Number"/>
-                            <TextBox x:Name="heightImage" Text="150" PlaceholderText="Height" Margin="5" InputScope="Number"/>
+                        <TextBox x:Name="widthImage" Text="130" PlaceholderText="Width" Margin="5" InputScope="Number"/>
+                        <TextBox x:Name="heightImage" Text="130" PlaceholderText="Height" Margin="5" InputScope="Number"/>
                     </StackPanel>
                         <TextBlock Text="Set Number of Rows"/>
                         <TextBox x:Name="rowNum" Text="3" PlaceholderText="No of Rows" Margin="5" InputScope="Number"/>
@@ -23,26 +23,30 @@
                         <TextBox x:Name="noOfImages" Text="7" PlaceholderText="No of Images" Margin="5" InputScope="Number"/>
                         <TextBlock Text="Header Font Size"/>
                         <TextBox x:Name="headerSize" Text="30" PlaceholderText="Header Size" Margin="5" InputScope="Number" TextChanged="headerSize_TextChanged"/>
-                        <ToggleSwitch IsOn="False" OnContent="Sub header - On" OffContent="Sub header - Off" Toggled="ToggleSwitch_Toggled"/>
+                        <ToggleSwitch IsOn="True" OnContent="Sub header - On" OffContent="Sub header - Off" Toggled="ToggleSwitch_Toggled"/>
                         <TextBlock Text="Border around each image - Choose thickness"/>
-                        <Slider x:Name="imageBorderThickness" TickFrequency="0.1" Value="0.5" Maximum="1" Minimum="0"/>
+                        <Slider x:Name="imageBorderThickness" Value="15"  Maximum="100"/>
                         <TextBlock Text="Sub-Header Font Size"/>
                         <TextBox x:Name="subHeaderSize" Text="20" PlaceholderText="Sub-header size" Margin="5" InputScope="Number" TextChanged="subHeaderSize_TextChanged"/>
+                        <HyperlinkButton NavigateUri="http://www.ygic.us/index.htm" Content="YGIC" FontSize="15" HorizontalAlignment="Right" FontWeight="ExtraLight"/>
+                        <HyperlinkButton NavigateUri="https://github.com/medhachaitanya/YGIC-Photo-Maker" Content="Source available on Github" FontSize="15" HorizontalAlignment="Right" FontWeight="ExtraLight"/>
                     </StackPanel>
                 </Grid>
             </CommandBar.Content>
             <AppBarButton  Label="Choose Folder" ToolTipService.ToolTip="Choose Folder" Click="AppBarButton_Click" Icon="Folder"/>
-            <AppBarButton x:Name="refreshButton"  Label="Refresh" ToolTipService.ToolTip="Refresh" Click="AppBarButton_Click2" Icon="Refresh" IsEnabled="False"/>
-            <AppBarButton  Label="Export Image" ToolTipService.ToolTip="Save to disk" Click="AppBarButton_Click1" Icon="Save"/>
             <AppBarSeparator />
+            <AppBarButton x:Name="refreshButton"  Label="Refresh" ToolTipService.ToolTip="Refresh" Click="AppBarButton_Click2" Icon="Refresh" IsEnabled="False"/>
+            <AppBarSeparator />
+            <AppBarButton  Label="Export Image" ToolTipService.ToolTip="Save to disk" Click="AppBarButton_Click1" Icon="Save"/>
+            
 
            
         </CommandBar>
     </Page.BottomAppBar>
     <Grid x:Name="grid" Background="White">
         <StackPanel  Orientation="Vertical" Margin="30" >
-            <TextBox x:Name="headerTB" BorderBrush="Transparent" Text="Header" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold"/>
-            <TextBox x:Name="subheaderTB" BorderBrush="Transparent" Text="Sub Header" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Visibility="Collapsed"/>
+            <TextBox x:Name="headerTB" BorderBrush="Transparent" Text="Title" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold"/>
+            <TextBox x:Name="subheaderTB" BorderBrush="Transparent" Text="Sub-Title" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
             <StackPanel x:Name="sp"  Margin="10" HorizontalAlignment="Center" Orientation="Vertical"/>
         </StackPanel>
     </Grid>
