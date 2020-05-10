@@ -28,6 +28,7 @@ namespace SampleCollege
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        StorageFolder testFolder = null;
         public MainPage()
         {
             this.InitializeComponent();
@@ -44,7 +45,7 @@ namespace SampleCollege
             var files = await folder.GetFilesAsync();
             await ApplicationData.Current.LocalFolder.CreateFolderAsync("ImagesFolder", CreationCollisionOption.ReplaceExisting);
             
-            StorageFolder testFolder =null;
+            
             foreach (var file in files)
             {
                 StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -84,51 +85,96 @@ namespace SampleCollege
                        // await file.CopyAsync(newFolder, desiredName, NameCollisionOption.ReplaceExisting);
                     }
                 }
-            }
-
-
-            int i = 0;
-            var files2 = await testFolder.GetFilesAsync();
-            foreach (var file in files2)
-            {
-                i += 1;
-                Debug.WriteLine(file.Path);
-                Debug.WriteLine(file.DisplayName);
-
-                BitmapImage bitmapImage = new BitmapImage();
-                Uri uri = new Uri(file.Path,UriKind.RelativeOrAbsolute);
-                bitmapImage.UriSource = uri;                
-                var spV = new StackPanel() { Orientation = Orientation.Vertical, Margin = new Thickness(10) };
-                spV.Children.Add(new Image() { Source = bitmapImage, Stretch = Stretch.UniformToFill, Width = Convert.ToInt32(widthImage.Text), Height = Convert.ToInt32(heightImage.Text) });
-                spV.Children.Add(new TextBlock() { Text = file.DisplayName, HorizontalAlignment = HorizontalAlignment.Center });
-                if(i<=7)
-                {
-                    sp1.Children.Add(spV);
-                }
-                else if( i>7 && i<=14)
-                {
-                    sp2.Children.Add(spV);
-                }
-                else if (i > 14 && i <= 21)
-                {
-                    sp3.Children.Add(spV);
-                }
-                else
-                {
-                    sp4.Children.Add(spV);
-                }
-
-            }
-            
-            
+            }            
+            Process(testFolder);
+            refreshButton.IsEnabled = true;
         }
 
-        
+        private async void Process(StorageFolder storageFolder)
+        {
+            var files2 = await storageFolder.GetFilesAsync();
+            int fileIndex = 0;
+            for (int rows = 0; rows < Convert.ToInt32(rowNum.Text); rows++)
+            {
+                //create a stackpanel with horizontal orientation
+                var horiSp = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(10), HorizontalAlignment = HorizontalAlignment.Center };
+                for (int image_num = 0; image_num < Convert.ToInt32(noOfImages.Text); image_num++)
+                {
+
+                    //add the image to the row sp
+                    StorageFile currentImagefile = files2[fileIndex];
+                    var spV = new StackPanel() { Orientation = Orientation.Vertical, Margin = new Thickness(10) };
+                    BitmapImage bitmapImage = new BitmapImage();
+                    Uri uri = new Uri(currentImagefile.Path, UriKind.RelativeOrAbsolute);
+                    bitmapImage.UriSource = uri;
+                    spV.Children.Add(new Image() { Source = bitmapImage, Stretch = Stretch.UniformToFill, Width = Convert.ToInt32(widthImage.Text), Height = Convert.ToInt32(heightImage.Text) });
+                    spV.Children.Add(new TextBlock() { Text = currentImagefile.DisplayName, HorizontalAlignment = HorizontalAlignment.Center });
+
+                    if (fileIndex < files2.Count)
+                    {
+                        fileIndex += 1;
+                    }
+                    horiSp.Children.Add(spV);
+                    if (fileIndex >= files2.Count - 1)
+                        break;
+
+                }
+                sp.Children.Add(horiSp);
+                if (fileIndex > files2.Count - 1)
+                    break;
+            }
+        }
         private void AppBarButton_Click1(object sender, RoutedEventArgs e)
         {
            
             
            // sp.Children.Add( new Image() { Source = bitmapImage , Stretch = Stretch.None , Width = 170, Height=170 });
+        }
+
+        private void headerSize_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                headerTB.FontSize = Convert.ToInt32(headerSize.Text);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Empty Header Size");
+            }
+        }
+
+        private void subHeaderSize_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                subheaderTB.FontSize = Convert.ToInt32(subHeaderSize.Text);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Empty Sub Header Size");
+            }
+            
+        }
+
+        private void AppBarButton_Click2(object sender, RoutedEventArgs e)
+        {
+            sp.Children.Clear();
+            Process(testFolder);
+
+        }
+
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch swi = sender as ToggleSwitch;
+            if (swi.IsOn)
+            {
+                subheaderTB.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                subheaderTB.Visibility = Visibility.Collapsed;
+            }
+            
         }
     }
 }

@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
+        <CommandBar ClosedDisplayMode="Compact">
             <CommandBar.Content>
                 <Grid Margin="20">
                     <StackPanel Orientation="Vertical">
@@ -21,10 +21,16 @@
                         <TextBox x:Name="rowNum" Text="3" PlaceholderText="No of Rows" Margin="5" InputScope="Number"/>
                         <TextBlock Text="Set Number of Images per Row"/>
                         <TextBox x:Name="noOfImages" Text="6" PlaceholderText="No of Images" Margin="5" InputScope="Number"/>
+                        <TextBlock Text="Header Font Size"/>
+                        <TextBox x:Name="headerSize" Text="30" PlaceholderText="Header Size" Margin="5" InputScope="Number" TextChanged="headerSize_TextChanged"/>
+                        <ToggleSwitch IsOn="True" OnContent="Sub header - On" OffContent="Sub header - Off" Toggled="ToggleSwitch_Toggled"/>
+                        <TextBlock Text="Sub-Header Font Size"/>
+                        <TextBox x:Name="subHeaderSize" Text="20" PlaceholderText="Sub-header size" Margin="5" InputScope="Number" TextChanged="subHeaderSize_TextChanged"/>
                     </StackPanel>
                 </Grid>
             </CommandBar.Content>
             <AppBarButton  Label="Choose Folder" ToolTipService.ToolTip="Choose Folder" Click="AppBarButton_Click" Icon="Folder"/>
+            <AppBarButton x:Name="refreshButton"  Label="Refresh" ToolTipService.ToolTip="Refresh" Click="AppBarButton_Click2" Icon="Refresh" IsEnabled="False"/>
             <AppBarButton  Label="Export Image" ToolTipService.ToolTip="Save to disk" Click="AppBarButton_Click1" Icon="Save"/>
             <AppBarSeparator />
 
@@ -33,29 +39,9 @@
     </Page.BottomAppBar>
     <Grid>
         <StackPanel  Orientation="Vertical" Margin="30">
-            <TextBox BorderBrush="Transparent" Text="Header" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold"/>
-            <TextBox BorderBrush="Transparent" Text="Sub Header" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
-            <StackPanel Margin="30" HorizontalAlignment="Center" Orientation="Vertical">
-
-                <StackPanel x:Name="sp1"  HorizontalAlignment="Center" Orientation="Horizontal">
-
-
-                </StackPanel>
-
-                <StackPanel x:Name="sp2" HorizontalAlignment="Center" Orientation="Horizontal">
-
-
-                </StackPanel>
-
-                <StackPanel x:Name="sp3" HorizontalAlignment="Center" Orientation="Horizontal">
-
-
-                </StackPanel>
-
-                <StackPanel x:Name="sp4" HorizontalAlignment="Center" Orientation="Horizontal">
-
-
-                </StackPanel>
+            <TextBox x:Name="headerTB" BorderBrush="Transparent" Text="Header" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold"/>
+            <TextBox x:Name="subheaderTB" BorderBrush="Transparent" Text="Sub Header" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+            <StackPanel x:Name="sp"  Margin="10" HorizontalAlignment="Center" Orientation="Vertical">
             </StackPanel>
         </StackPanel>
     </Grid>
