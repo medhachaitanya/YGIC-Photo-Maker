@@ -9,7 +9,7 @@
 
   <Identity
     Name="cc49d46e-556a-452d-b547-9030a33c8c84"
-    Publisher="CN=medha"
+    Publisher="CN=Medha Karri"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="cc49d46e-556a-452d-b547-9030a33c8c84" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
