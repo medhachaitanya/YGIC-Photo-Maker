@@ -18,3 +18,6 @@ In case you get any certificate errors, download the *.cer file and add the cert
 ![Step 6](https://github.com/medhachaitanya/YGIC-Photo-Maker/blob/master/AppReleases/Images/Step%207.PNG)
 ## Step 7
 ![Step 7](https://github.com/medhachaitanya/YGIC-Photo-Maker/blob/master/AppReleases/Images/Step%208.PNG)
+
+
+You can write to me at medhachaitanya@outlook.com
